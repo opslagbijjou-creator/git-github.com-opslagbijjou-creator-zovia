@@ -2,6 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { CONTACT_EMAIL, NAV_ITEMS, waLink } from "../siteConfig";
 
+const PAGE_TITLES = {
+  "/": "Zovia Thuiszorg | Home",
+  "/over-ons": "Zovia Thuiszorg | Over ons",
+  "/zorgaanbod": "Zovia Thuiszorg | Zorgaanbod",
+  "/werkwijze": "Zovia Thuiszorg | Werkwijze",
+  "/werkgebied": "Zovia Thuiszorg | Werkgebied",
+  "/werken-bij-ons": "Zovia Thuiszorg | Werken bij ons",
+  "/contact-zorg-aanvragen": "Zovia Thuiszorg | Contact / Zorg aanvragen"
+};
+
 const removeOldPageClasses = () => {
   const classes = [...document.body.classList];
   classes.forEach((name) => {
@@ -33,6 +43,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     removeOldPageClasses();
     document.body.classList.add(toPageClass(location.pathname));
+    document.title = PAGE_TITLES[location.pathname] || "Zovia Thuiszorg";
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
@@ -114,17 +125,19 @@ export default function Layout({ children }) {
           <button
             className="menu-toggle"
             type="button"
+            aria-controls="site-nav"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((old) => !old)}
           >
             {menuOpen ? "Sluit" : "Menu"}
           </button>
 
-          <nav className={`nav${menuOpen ? " is-open" : ""}`} aria-label="Hoofdmenu">
+          <nav id="site-nav" className={`nav${menuOpen ? " is-open" : ""}`} aria-label="Hoofdmenu">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
+                onClick={() => setMenuOpen(false)}
                 className={({ isActive }) => {
                   const parts = [];
                   if (item.cta) parts.push("nav-cta");
