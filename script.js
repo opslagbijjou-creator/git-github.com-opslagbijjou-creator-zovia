@@ -4,7 +4,28 @@ if (yearNode) {
 }
 
 const body = document.body;
+const header = document.querySelector(".header");
 const whatsappNumber = (body.dataset.whatsappNumber || "").replace(/[^\d]/g, "");
+
+const scrollProgress = document.createElement("div");
+scrollProgress.className = "scroll-progress";
+document.body.appendChild(scrollProgress);
+
+const updateScrollUI = () => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = maxScroll > 0 ? Math.min(scrollTop / maxScroll, 1) : 0;
+
+  scrollProgress.style.transform = `scaleX(${ratio})`;
+
+  if (header) {
+    header.classList.toggle("is-scrolled", scrollTop > 8);
+  }
+};
+
+updateScrollUI();
+window.addEventListener("scroll", updateScrollUI, { passive: true });
+window.addEventListener("resize", updateScrollUI);
 
 const updateWhatsappLinks = (root = document) => {
   root.querySelectorAll(".js-whatsapp-link").forEach((link) => {
@@ -53,14 +74,17 @@ const nav = document.querySelector(".nav");
 const navWrap = document.querySelector(".nav-wrap");
 
 if (menuToggle && nav) {
-  const closeMenu = () => {
-    nav.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
+  const setMenuState = (open) => {
+    nav.classList.toggle("is-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.textContent = open ? "Sluit" : "Menu";
   };
 
+  const closeMenu = () => setMenuState(false);
+
   menuToggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    menuToggle.setAttribute("aria-expanded", String(open));
+    const open = !nav.classList.contains("is-open");
+    setMenuState(open);
   });
 
   nav.querySelectorAll("a").forEach((link) => {
@@ -81,6 +105,14 @@ if (menuToggle && nav) {
       closeMenu();
     }
   });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      closeMenu();
+    }
+  });
+
+  closeMenu();
 }
 
 const normalizePageName = (pathLike) => {
