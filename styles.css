@@ -842,36 +842,143 @@ body.page-contact-zorg-aanvragen {
 @media (max-width: 760px) {
   body {
     padding-bottom: 84px;
+    background: #f4f8fb;
+  }
+
+  .site-bg,
+  .site-bg::before {
+    display: none;
+  }
+
+  .scroll-progress {
+    height: 2px;
   }
 
   .header {
-    padding-top: 0.35rem;
+    padding-top: 0;
+  }
+
+  .header.is-scrolled {
+    padding-top: 0;
+  }
+
+  .topbar {
+    display: none;
+  }
+
+  .nav-wrap {
+    margin-top: 0.5rem;
+    min-height: 66px;
+    padding: 0.56rem 0.62rem;
+    border-radius: 12px;
+    box-shadow: none;
+    background: #fff;
+    backdrop-filter: none;
   }
 
   .brand {
-    min-width: 145px;
+    min-width: 132px;
   }
 
   .brand-logo {
-    max-height: 52px;
+    max-height: 44px;
+  }
+
+  .menu-toggle {
+    background: #f3f8fb;
+    box-shadow: inset 0 0 0 1px rgba(37, 80, 122, 0.18);
+  }
+
+  .nav {
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .nav a {
+    padding: 0.66rem 0.75rem;
+  }
+
+  main {
+    padding-top: 0;
+  }
+
+  .top-banner {
+    margin-top: 0.6rem;
+    border-radius: 14px;
+    border-color: rgba(37, 80, 122, 0.13);
+    box-shadow: none;
+  }
+
+  .top-banner::after {
+    display: none;
+  }
+
+  .top-banner__inner {
+    min-height: 168px;
+    padding: 0.85rem 0.95rem;
+  }
+
+  .top-banner__kicker {
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.56rem;
+    font-size: 0.68rem;
+  }
+
+  .top-banner__content p {
+    display: none;
+  }
+
+  .top-banner__actions {
+    margin-top: 0.5rem;
+  }
+
+  .top-banner__actions .btn:not(:first-child) {
+    display: none;
+  }
+
+  .photo-ribbon {
+    display: none !important;
+  }
+
+  .section {
+    margin: 2.35rem auto;
+  }
+
+  .hero {
+    margin-top: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .hero-card {
+    display: none;
   }
 
   .hero-copy,
-  .hero-card,
   .card,
   .service,
   .step {
-    padding: 1rem;
-    border-radius: 15px;
+    padding: 0.9rem;
+    border-radius: 12px;
+    box-shadow: none;
+    border-color: rgba(37, 80, 122, 0.13);
   }
 
   .hero h1 {
-    font-size: clamp(1.56rem, 7vw, 2.12rem);
+    font-size: clamp(1.42rem, 6.8vw, 1.95rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-head h2 {
+    font-size: 1.5rem;
   }
 
   .hero-actions,
   .top-banner__actions {
-    gap: 0.5rem;
+    gap: 0.42rem;
+  }
+
+  .hero-actions .btn:not(:first-child) {
+    display: none;
   }
 
   .hero-actions .btn,
@@ -910,7 +1017,7 @@ body.page-contact-zorg-aanvragen {
 
   .mobile-quickbar a {
     min-height: 44px;
-    border-radius: 12px;
+    border-radius: 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -922,15 +1029,6 @@ body.page-contact-zorg-aanvragen {
 
   .mobile-quickbar a.mobile-quickbar__wa {
     background: linear-gradient(120deg, var(--ok), #117b53);
-  }
-
-  .photo-ribbon {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-  }
-
-  .photo-card img {
-    height: 184px;
   }
 }
 
